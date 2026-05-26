@@ -1,4 +1,4 @@
-robot: "go1"  # Robot name, "go2", "b2", "b2w", "h1", "go2w", "g1"
+robot: "go2"  # Robot name, "go2", "b2", "b2w", "h1", "go2w", "g1"
 
 # extra robots
 #       unitree       : "go1", "aliengo", "a1",
@@ -6,9 +6,13 @@ robot: "go1"  # Robot name, "go2", "b2", "b2w", "h1", "go2w", "g1"
 #       xiaomi        : "cyberdog"
 #       anybotics     : "anymal_b" "anymal_c"
 
+# Robot simulation scene file
+# For example, for go2, it refers to the scene.xml file in the /unitree_robots/go2/ folder
 robot_scene: "scene.xml" # Robot scene, /unitree_robots/[robot]/scene.xml 
 
+# DDS domain id, it is recommended to distinguish from the real robot (default is 0 on the real robot)
 domain_id: 1  # Domain id
+# Network interface name, for simulation, it is recommended to use the local loopback "lo"
 interface: "lo" # Interface 
 
 use_joystick: 0 # Simulate Unitree WirelessController using a gamepad

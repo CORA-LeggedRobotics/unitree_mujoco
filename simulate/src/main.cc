@@ -509,6 +509,17 @@ void PhysicsThread(mj::Simulate *sim, const char *filename)
     if (d)
     {
       sim->Load(m, d, filename);
+
+      // Apply --key <index> if requested and within range.
+      if (param::config.init_key >= 0 && param::config.init_key < m->nkey)
+      {
+        mj_resetDataKeyframe(m, d, param::config.init_key);
+      }
+      // Apply --init_z <z> override (after keyframe load so it wins).
+      if (param::config.init_z != 0.0 && m->nq >= 3)
+      {
+        d->qpos[2] = param::config.init_z;
+      }
       mj_forward(m, d);
 
       // allocate ctrlnoise

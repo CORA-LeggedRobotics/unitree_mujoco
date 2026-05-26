@@ -1,5 +1,6 @@
 cmake_minimum_required(VERSION 3.5)
 project(stand_go2)
+set(HOME_DIR $ENV{HOME})
 
 # Default to C99
 if(NOT CMAKE_C_STANDARD)

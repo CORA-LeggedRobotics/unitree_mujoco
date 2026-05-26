@@ -26,6 +26,9 @@ inline struct SimulationConfig
     int enable_elastic_band;
     int band_attached_link = 0;
 
+    int init_key = -1;       // keyframe index to load on startup, -1 = none (use qpos0)
+    double init_z = 0.0;     // override base z position in meters, 0 = no override
+
     void load_from_yaml(const std::string &filename)
     {
         auto cfg = YAML::LoadFile(filename);
@@ -63,6 +66,8 @@ inline po::variables_map helper(int argc, char** argv)
         ("network,n", po::value<std::string>(&config.interface), "DDS network interface; -n eth0")
         ("robot,r", po::value<std::string>(&config.robot), "Robot type; -r go2")
         ("scene,s", po::value<std::filesystem::path>(&config.robot_scene), "Robot scene file; -s scene_terrain.xml")
+        ("key,k", po::value<int>(&config.init_key)->default_value(-1), "Initial keyframe index to load; default -1 (keep qpos0). e.g. -k 0 loads 'home'")
+        ("init_z,z", po::value<double>(&config.init_z)->default_value(0.0), "Override initial base z position [m]; default 0 (no override). e.g. -z 0.4 to spawn above a 0.3m step")
     ;
 
     po::variables_map vm;
